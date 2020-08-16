@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">My Application2</string>
+    <string name="food_city">Food city</string>
+    <string name="Jayakody">Jayakody</string>
+    <string name="addlocation">Add Location</string>
+    <string name="sunyside">Sunny side</string>
+    <string name="foodcorner">Food corner</string>
+    <string name="laugh">Laugh</string>
+    <string name="Keels">Keels</string>
+    <string name="Dailygroceries">Daily Groceries</string>
+    <string name="tomato">Tomato</string>
+    <string name="soap">Soap</string>
+    <string name="fruits">Fruits</string>
+    <string name="meat">Meats</string>
+    <string name="carrot">Carrot</string>
+</resources>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Item_Details">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="#FFE26F">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="165dp"
+                android:layout_marginBottom="14dp"
+                android:fontFamily="@font/boogaloo"
+                android:text="Keels"
+                android:textColor="#000"
+                android:textSize="50sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="270dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_ppya" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/boogaloo"
+            android:text="Papaya"
+            android:textColor="#000"
+            android:textSize="40dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/boogaloo"
+            android:text="Helps in weight lose and"
+            android:textColor="#000"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/boogaloo"
+            android:text="Better for Kidney health"
+            android:textColor="#000"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/boogaloo"
+            android:text="Rs.70.00"
+            android:textColor="#000"
+            android:textSize="40dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="-40dp"
+            android:fontFamily="@font/boogaloo"
+            android:text="Qty:"
+            android:textColor="#000"
+            android:textSize="15dp" />
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="-30dp"
+            android:background="#CACACA"
+            android:fontFamily="@font/boogaloo"
+            android:gravity="center"
+            android:text="-"
+            android:textSize="20sp" />
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="261dp"
+            android:layout_marginTop="-50dp"
+            android:background="#CACACA"
+            android:fontFamily="@font/boogaloo"
+            android:gravity="center"
+            android:text="+"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="-40dp"
+            android:fontFamily="@font/boogaloo"
+            android:text="1"
+            android:textColor="#000"
+            android:textSize="25dp" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="30dp"
+            android:background="#FF8B00"
+            android:drawableRight="@drawable/ic_cart"
+            android:fontFamily="@font/boogaloo"
+            android:gravity="center"
+            android:text="Cart"
+            android:textSize="20sp" />
+
+        <Button
+            android:layout_width="240dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="-50dp"
+            android:background="#E800A1"
+            android:fontFamily="@font/boogaloo"
+            android:gravity="center"
+            android:text="Order Now"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
