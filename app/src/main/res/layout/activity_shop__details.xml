@@ -187,7 +187,6 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src=""
             android:layout_marginTop="-85dp"
             android:layout_marginStart="180dp"/>
 
