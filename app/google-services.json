@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "797609626210",
+    "firebase_url": "https://corona---mad-mini-project.firebaseio.com",
+    "project_id": "corona---mad-mini-project",
+    "storage_bucket": "corona---mad-mini-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797609626210:android:d053c9be2263577d115f3b",
+        "android_client_info": {
+          "package_name": "com.example.myapplication2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797609626210-q1qevjqveserpqlqfob2c3c1una802lr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYd0XPldhD7IO-qa2iWMLftwtIib0WLhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797609626210-q1qevjqveserpqlqfob2c3c1una802lr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

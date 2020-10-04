@@ -24,7 +24,7 @@
             android:layout_marginStart="165dp"
             android:layout_marginBottom="14dp"
             android:fontFamily="@font/boogaloo"
-            android:text="Keels"
+            android:text="@string/Keels"
             android:textColor="#000"
             android:textSize="50sp" />
     </RelativeLayout>
@@ -48,6 +48,7 @@
         android:textColor="#000"
         />
         <TextView
+            android:id="@+id/quty2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quantity: 1Kg"
