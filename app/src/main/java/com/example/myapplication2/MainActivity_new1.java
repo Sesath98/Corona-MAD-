@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity_new1 extends AppCompatActivity {
 
 
-    private Button joinNowButton,loginButton;
-
+    private Button joinNowButton, loginButton;
 
 
     @Override
@@ -19,19 +19,27 @@ public class MainActivity_new1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_new1);
 
-        joinNowButton =(Button)findViewById(R.id.main_join_btn);
+        Toast.makeText(MainActivity_new1.this, "Firebase connectivity successfully", Toast.LENGTH_SHORT).show();
+
+        joinNowButton = (Button) findViewById(R.id.main_join_btn);
         loginButton = (Button) findViewById(R.id.main_login_btn);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                Intent intent = new Intent(MainActivity_new1.this,loginActvity.class);
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity_new1.this, loginActvity.class);
                 startActivity(intent);
             }
         });
 
-
+        joinNowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(MainActivity_new1.this, RegistryActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
