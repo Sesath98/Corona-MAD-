@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Item_Details">
+    android:background="@drawable/welcome3"
+    tools:context=".Add_cart_new">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -14,60 +17,46 @@
         app:layout_constraintStart_toStartOf="parent">
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="#FFE26F">
 
-            <TextView
-                android:id="@+id/keels"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="165dp"
-                android:layout_marginBottom="14dp"
-                android:fontFamily="@font/boogaloo"
-                android:text="keels"
-                android:textColor="#000"
-                android:textSize="50sp" />
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="#FFC300 "
-            android:layout_marginTop="25dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="80dp"
+            android:background="#00D3A6 "
             tools:ignore="MissingConstraints">
+
 
             <ImageView
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="275dp">
+                android:layout_marginRight="275dp"
+                android:src="@drawable/papaya">
 
             </ImageView>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:id="@+id/item_Name"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="200dp"
                 android:text="Papaya"
                 android:textColor="#000"
-                android:textSize="25dp"
+                android:textSize="35dp"
                 android:fontFamily="@font/boogaloo">
             </TextView>
 
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="150dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="200dp"
-                android:layout_marginTop="29dp"
+                android:layout_below="@+id/item_Name"
                 android:fontFamily="@font/boogaloo"
                 android:text="Rs 70.00"
                 android:textColor="#000"
-                android:textSize="18dp">
+                android:textSize="20dp">
 
             </TextView>
 
@@ -76,6 +65,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="350dp"
+                android:layout_marginTop="25dp"
                 android:text="-"
                 android:textSize="25dp">
 
@@ -86,8 +76,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="#FFC300 "
-            android:layout_marginTop="391dp"
+            android:background="#00D3A6 "
+            android:layout_marginTop="360dp"
             tools:ignore="MissingConstraints">
 
 
@@ -95,7 +85,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
+
                 android:layout_marginLeft="20dp"
                 android:text="Totall"
                 android:textColor="#000"
@@ -137,4 +127,5 @@
 
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
