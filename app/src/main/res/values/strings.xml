@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CouchPotatoLK</string>
+    <string name="title_activity_seller_home">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="invalid_name">Please give a valid name</string>
+    <string name="invalid_mobile">Please enter a valid phone number</string>
+    <string name="invalid_email">Please enter a valid email</string>
+    <string name="invalid_password">Please enter a valid password</string>
+    <string name="invalid_website">Please enter a valid URL</string>
+</resources>
