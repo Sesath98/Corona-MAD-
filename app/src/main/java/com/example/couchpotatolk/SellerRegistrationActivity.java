@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,7 +28,7 @@ import java.util.HashMap;
 public class SellerRegistrationActivity extends AppCompatActivity {
 
 
-    //private Button sellerLoginBegin;
+    private Button sellerLoginBegin;
     private EditText nameInput, phoneInput, emailInput, passwordInput, websiteInput, descInput;
     private Button registerButton;
 
@@ -63,7 +65,7 @@ public class SellerRegistrationActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         loadingbar = new ProgressDialog(this);
 
-        //sellerLoginBegin = findViewById(R.id.seller_alreadyhave_btn);
+        sellerLoginBegin = findViewById(R.id.seller_alreadyhave_btn);
         registerButton = findViewById(R.id.seller_register_btn);
         nameInput = findViewById(R.id.seller_name);
         phoneInput = findViewById(R.id.seller_phone);
@@ -90,7 +92,7 @@ public class SellerRegistrationActivity extends AppCompatActivity {
     }
 
     private void registerSeller() {
-        String name = nameInput.getText().toString();
+        final String name = nameInput.getText().toString();
         final String phone = phoneInput.getText().toString();
         final String email = emailInput.getText().toString();
         final String password = passwordInput.getText().toString();
@@ -130,6 +132,11 @@ public class SellerRegistrationActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 loadingbar.dismiss();
                                                 Toast.makeText(SellerRegistrationActivity.this, "Registered Successfully.",Toast.LENGTH_SHORT).show();
+
+                                                Intent intent = new Intent(SellerRegistrationActivity.this, SellerHomeActivity.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                startActivity(intent);
+                                                finish();
                                             }
                                         });
 
@@ -143,4 +150,24 @@ public class SellerRegistrationActivity extends AppCompatActivity {
             Toast.makeText(this,"Please fill in the form to register",Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (firebaseUser != null)
+        {
+            Intent intent = new Intent(SellerRegistrationActivity.this, SellerHomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+
+    }
+
+
+
 }
