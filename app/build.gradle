@@ -39,6 +39,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation 'io.paperdb:paperdb:2.6'
     implementation 'com.google.android.material:material:1.2.0'
     implementation 'com.github.rey5137:material:1.2.1'
     testImplementation 'junit:junit:4.12'

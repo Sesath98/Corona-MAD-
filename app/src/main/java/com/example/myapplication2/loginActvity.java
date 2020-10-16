@@ -1,7 +1,5 @@
 package com.example.myapplication2;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,16 +7,24 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import com.rey.material.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication2.Model.Users;
+import com.example.myapplication2.Prevalent.Prevalent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import com.example.myapplication2.Model.Users;
+
+
+import io.paperdb.Paper;
 
 public class loginActvity extends AppCompatActivity
 {
@@ -27,6 +33,9 @@ public class loginActvity extends AppCompatActivity
     private ProgressDialog loadingBar;
 
     private String parentDbName = "Users";
+
+//    checkboxRemeberme
+     private CheckBox chkBoxRememberme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +46,10 @@ public class loginActvity extends AppCompatActivity
         InputPassword = (EditText) findViewById(R.id.login_password);
         InputPhoneNumber = (EditText)findViewById(R.id.login_user);
         loadingBar = new ProgressDialog(this);
+
+        //    checkboxRemeberme
+        chkBoxRememberme = (CheckBox)findViewById(R.id.remember_mebtn);
+        Paper.init(this);
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +93,15 @@ public class loginActvity extends AppCompatActivity
 
     private void AllowAccessToAccount(String phone, String password)
     {
+        if(chkBoxRememberme.isChecked())
+        {
+
+            Paper.book().write(Prevalent.UserPhoneKey,phone);
+            Paper.book().write(Prevalent.UserPasswordKey,password);
+        }
+
+
+
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
 
@@ -100,6 +122,12 @@ public class loginActvity extends AppCompatActivity
 
                             Intent intent = new Intent(loginActvity.this, HomeActivity.class);
                             startActivity(intent);
+
+                        }
+                        else
+                        {
+                            loadingBar.dismiss();
+                            Toast.makeText(loginActvity.this,"Password is incorrect",Toast.LENGTH_SHORT).show();
 
                         }
 

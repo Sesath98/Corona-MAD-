@@ -61,6 +61,7 @@
 
 
     <com.rey.material.widget.CheckBox
+        android:id="@+id/remember_mebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Material.Drawable.CheckBox"
