@@ -18,11 +18,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import Model.Users;
+import com.example.myapplication2.Model.Users;
 
 public class loginActvity extends AppCompatActivity
 {
-    private EditText InputName, InputPassword;
+    private EditText InputPhoneNumber, InputPassword;
     private Button LoginButton;
     private ProgressDialog loadingBar;
 
@@ -35,7 +35,7 @@ public class loginActvity extends AppCompatActivity
 
         LoginButton =(Button)findViewById(R.id.login_btn);
         InputPassword = (EditText) findViewById(R.id.login_password);
-        InputName = (EditText)findViewById(R.id.login_user);
+        InputPhoneNumber = (EditText)findViewById(R.id.login_user);
         loadingBar = new ProgressDialog(this);
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
@@ -50,12 +50,12 @@ public class loginActvity extends AppCompatActivity
     }
 
     private void LoginUser() {
-        String name = InputName.getText().toString();
+        String phone = InputPhoneNumber.getText().toString();
         String password = InputPassword.getText().toString();
 
-          if (TextUtils.isEmpty(name))
+          if (TextUtils.isEmpty(phone))
           {
-            Toast.makeText(this, "please write your phone number ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "please write your username  ", Toast.LENGTH_SHORT).show();
           }
           else if (TextUtils.isEmpty(password))
           {
@@ -68,12 +68,17 @@ public class loginActvity extends AppCompatActivity
                   loadingBar.setCanceledOnTouchOutside(false);
                   loadingBar.show();
 
-                    AllowAccessToAccount(name,password);
+                    AllowAccessToAccount(phone,password);
 
               }
           }
 
-    private void AllowAccessToAccount(String name, String password)
+
+
+
+
+
+    private void AllowAccessToAccount(String phone, String password)
     {
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
@@ -82,11 +87,11 @@ public class loginActvity extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                if(dataSnapshot.child(parentDbName).child(name).exists())
+                if(dataSnapshot.child(parentDbName).child(phone).exists())
                 {
-                    Users usersData = dataSnapshot.child(parentDbName).child(name).getValue(Users.class);
+                    Users usersData = dataSnapshot.child(parentDbName).child(phone).getValue(Users.class);
 
-                    if(usersData.getName().equals(name))
+                    if(usersData.getName().equals(phone))
                     {
                         if (usersData.getPassword().equals(password))
                         {
@@ -103,7 +108,7 @@ public class loginActvity extends AppCompatActivity
                 }
                 else
                 {
-                    Toast.makeText(loginActvity.this,"Account with this" + name + " name do not exist.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(loginActvity.this,"Account with this " + phone + " name do not exist. ",Toast.LENGTH_SHORT).show();
                      loadingBar.dismiss();
                      Toast.makeText(loginActvity.this,"you need to create a new account.",Toast.LENGTH_SHORT).show();
 
