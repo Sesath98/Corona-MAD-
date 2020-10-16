@@ -6,168 +6,156 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.basgeekball.awesomevalidation.AwesomeValidation;
-import com.basgeekball.awesomevalidation.ValidationStyle;
-import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 
 public class SellerRegistrationActivity extends AppCompatActivity {
 
-
-    private Button sellerLoginBegin;
+    //variable declaration
     private EditText nameInput, phoneInput, emailInput, passwordInput, websiteInput, descInput;
-    private Button registerButton;
-
-    AwesomeValidation awesomeValidation;
-
-    private FirebaseAuth mAuth;
-
-    private ProgressDialog loadingbar;
+    private Button create_vendor;
+    private ProgressDialog loadingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_registration_activity);
 
-        //Initialize Validation Styles
-                awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+        create_vendor = (Button)findViewById(R.id.seller_register_btn);
+        nameInput = (EditText)findViewById(R.id.seller_name);
+        phoneInput = (EditText)findViewById(R.id.seller_phone);
+        emailInput = (EditText)findViewById(R.id.seller_email);
+        passwordInput = (EditText)findViewById(R.id.seller_password);
+        websiteInput = (EditText)findViewById(R.id.seller_website);
+        descInput = (EditText)findViewById(R.id.seller_desc);
+        loadingBar = new ProgressDialog(this);
 
-        //validations for variables
-        awesomeValidation.addValidation(this,R.id.seller_name,
-                RegexTemplate.NOT_EMPTY,R.string.invalid_name);
-
-        awesomeValidation.addValidation(this,R.id.seller_phone,
-                "[5-1]{1}[0-9]{9}$",R.string.invalid_mobile);
-
-        awesomeValidation.addValidation(this,R.id.seller_email,
-                Patterns.EMAIL_ADDRESS,R.string.invalid_email);
-
-        awesomeValidation.addValidation(this,R.id.seller_password,
-                Patterns.EMAIL_ADDRESS,R.string.invalid_password);
-
-        awesomeValidation.addValidation(this,R.id.seller_website,
-                Patterns.WEB_URL,R.string.invalid_website);
-
-        mAuth = FirebaseAuth.getInstance();
-        loadingbar = new ProgressDialog(this);
-
-        sellerLoginBegin = findViewById(R.id.seller_alreadyhave_btn);
-        registerButton = findViewById(R.id.seller_register_btn);
-        nameInput = findViewById(R.id.seller_name);
-        phoneInput = findViewById(R.id.seller_phone);
-        emailInput = findViewById(R.id.seller_email);
-        passwordInput = findViewById(R.id.seller_password);
-        websiteInput = findViewById(R.id.seller_website);
-        descInput = findViewById(R.id.seller_desc);
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        create_vendor.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //Check Validation
-                if(awesomeValidation.validate()){
-                    //On Success
-                    Toast.makeText(getApplicationContext(),"Validation Successful",Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(getApplicationContext(),
-                            "Validation Failed",Toast.LENGTH_SHORT).show();
-                }
-
-                registerSeller();
+            public void onClick(View view)
+            {
+                CreateAccount();
             }
         });
-    }
+}
 
-    private void registerSeller() {
-        final String name = nameInput.getText().toString();
-        final String phone = phoneInput.getText().toString();
-        final String email = emailInput.getText().toString();
-        final String password = passwordInput.getText().toString();
-        final String website = websiteInput.getText().toString();
-        final String desc = descInput.getText().toString();
+    private void CreateAccount() {
+        String name = nameInput.getText().toString();
+        String phone = phoneInput.getText().toString();
+        String email = emailInput.getText().toString();
+        String password = passwordInput.getText().toString();
+        String website = websiteInput.getText().toString();
+        String description = descInput.getText().toString();
 
-        if (!name.equals("") && !phone.equals("") && !email.equals("") && !password.equals("") && !website.equals("") && !desc.equals(""))
+        if(TextUtils.isEmpty(name))
         {
-            loadingbar.setTitle("Creating Vendor Account");
-            loadingbar.setMessage("Please wait while we are checking the credentials");
-            loadingbar.setCanceledOnTouchOutside(false);
-            loadingbar.show();
+            Toast.makeText(this, "Please fill in your name.", Toast.LENGTH_SHORT).show();
+        }
 
+        else if (TextUtils.isEmpty(email))
+        {
+            Toast.makeText(this, "Please fill a valid email address.", Toast.LENGTH_SHORT).show();
+        }
 
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful())
-                            {
-                                final DatabaseReference rootRef;
-                                rootRef = FirebaseDatabase.getInstance().getReference();
-
-                                String sid = mAuth.getCurrentUser().getUid();
-
-                                HashMap<String,Object> sellerMap = new HashMap<>();
-                                sellerMap.put("sid",sid);
-                                sellerMap.put("phone",phone);
-                                sellerMap.put("email",email);
-                                sellerMap.put("password",password);
-                                sellerMap.put("website",website);
-                                sellerMap.put("desc",desc);
-
-                                rootRef.child("Sellers").child(sid).updateChildren(sellerMap)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                loadingbar.dismiss();
-                                                Toast.makeText(SellerRegistrationActivity.this, "Registered Successfully.",Toast.LENGTH_SHORT).show();
-
-                                                Intent intent = new Intent(SellerRegistrationActivity.this, SellerHomeActivity.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        });
-
-
-                            }
-                        }
-                    });
+        else if (TextUtils.isEmpty(password))
+        {
+            Toast.makeText(this, "Please fill a 6 digit password.", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(website))
+        {
+            Toast.makeText(this, "Please fill a valid URL.", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(description))
+        {
+            Toast.makeText(this, "Please enter description.",Toast.LENGTH_SHORT).show();
         }
         else
         {
-            Toast.makeText(this,"Please fill in the form to register",Toast.LENGTH_SHORT).show();
+            loadingBar.setTitle("Creating your account..");
+            loadingBar.setMessage("Please wait while we check your credentials.");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
+
+            ValidatePhoneNumber (name,phone,email,password,website,description);
         }
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (firebaseUser != null)
-        {
-            Intent intent = new Intent(SellerRegistrationActivity.this, SellerHomeActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        }
-
-    }
-
-
 
 }
+
+    private void ValidatePhoneNumber(final String name, final String phone, final String email, final String password, final String website, final String description) {
+        final DatabaseReference RootRef;
+        RootRef = FirebaseDatabase.getInstance().getReference();
+
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                if (!(dataSnapshot.child("Vendors").child(phone).exists()))
+                {
+                    HashMap<String,Object> userdataMap = new HashMap<>();
+                    userdataMap.put("phone",phone);
+                    userdataMap.put("email",email);
+                    userdataMap.put("password",password);
+                    userdataMap.put("website",website);
+                    userdataMap.put("name",name);
+                    userdataMap.put("description",description);
+
+                    RootRef.child("Vendors").child(phone).updateChildren(userdataMap)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task)
+                                {
+                                    if (task.isSuccessful())
+                                    {
+                                        Toast.makeText(SellerRegistrationActivity.this,"Congratulations! Your account has been created successfully.",Toast.LENGTH_SHORT).show();
+                                        loadingBar.dismiss();
+
+                                        Intent intent = new Intent(SellerRegistrationActivity.this, SellerLoginActivity.class);
+                                        startActivity(intent);
+                                    }
+                                    else
+                                    {
+                                        loadingBar.dismiss();
+                                        Toast.makeText(SellerRegistrationActivity.this,"Network error. Please try again later",Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+
+                }
+                else
+                {
+                    Toast.makeText(SellerRegistrationActivity.this,"This"+ phone + "already exists.",Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                    Toast.makeText(SellerRegistrationActivity.this,"Please try again using another phone number",Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(SellerRegistrationActivity.this, SellerLoginActivity.class);
+                    startActivity(intent);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+}
+
+

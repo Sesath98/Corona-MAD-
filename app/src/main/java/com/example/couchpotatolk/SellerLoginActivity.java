@@ -6,76 +6,119 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import com.example.couchpotatolk.Model.Vendors;
 
 public class SellerLoginActivity extends AppCompatActivity {
 
-    private Button loginSellerBtn;
-    private EditText  emailInput, passwordInput;
+    private EditText emailInput, passwordInput;
+    private Button LoginButton;
+    private ProgressDialog loadingBar;
 
-    private ProgressDialog loadingbar;
-
-    private FirebaseAuth mAuth;
-
+    private String parentDbName = "Vendors";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_login);
 
-        mAuth = FirebaseAuth.getInstance();
+        LoginButton =(Button)findViewById(R.id.seller_login_btn);
+        emailInput = (EditText)findViewById(R.id.seller_login_email);
+        passwordInput = (EditText) findViewById(R.id.seller_login_password);
 
+        loadingBar = new ProgressDialog(this);
 
-        emailInput = findViewById(R.id.seller_login_email);
-        passwordInput = findViewById(R.id.seller_login_password);
-        loginSellerBtn = findViewById(R.id.seller_login_btn);
-        loadingbar = new ProgressDialog(this);
-
-        loginSellerBtn.setOnClickListener(new View.OnClickListener() {
+        LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                loginSeller();
+            public void onClick(View view)
+            {
+                LoginSeller();
             }
         });
+
+
     }
 
-    private void loginSeller() {
-        final String email = emailInput.getText().toString();
-        final String password = passwordInput.getText().toString();
+    private void LoginSeller() {
+        String email = emailInput.getText().toString();
+        String password = passwordInput.getText().toString();
 
-        if ( !email.equals("") && !password.equals("") )
+        if (TextUtils.isEmpty(email))
         {
-            loadingbar.setTitle("Vendor Account Login");
-            loadingbar.setMessage("Please wait while we are checking the credentials");
-            loadingbar.setCanceledOnTouchOutside(false);
-            loadingbar.show();
+            Toast.makeText(this, "Please enter your email  ", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(password))
+        {
+            Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            loadingBar.setTitle("Log into your account");
+            loadingBar.setMessage("Please wait while we are checking the credentials");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
 
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task)
+            AllowAccessToAccount(email,password);
+
+        }
+    }
+
+
+
+    private void AllowAccessToAccount(final String email, final String password)
+    {
+        final DatabaseReference RootRef;
+        RootRef = FirebaseDatabase.getInstance().getReference();
+
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                if(dataSnapshot.child(parentDbName).child(email).exists())
+                {
+                    Vendors usersData = dataSnapshot.child(parentDbName).child(email).getValue(Vendors.class);
+
+                    if(usersData.getName().equals(email))
+                    {
+                        if (usersData.getPassword().equals(password))
                         {
-                            if (task.isSuccessful()){
-                                Intent intent = new Intent(SellerLoginActivity.this, SellerHomeActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                                finish();
-                            }
+                            Toast.makeText(SellerLoginActivity.this,"Logged in successfully...",Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+
+                            Intent intent = new Intent(SellerLoginActivity.this, SellerHomeActivity.class);
+                            startActivity(intent);
+
                         }
-                    });
+
+                    }
+
+                }
+                else
+                {
+                    Toast.makeText(SellerLoginActivity.this,"Account with " + email + "  do not exist. ",Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                    Toast.makeText(SellerLoginActivity.this,"Register to create a new account.",Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
-        }
-        else {
-            Toast.makeText(this,"Please fill in the your login credentials",Toast.LENGTH_SHORT).show();
-        }
     }
 }
