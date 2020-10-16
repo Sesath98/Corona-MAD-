@@ -55,7 +55,7 @@ public class loginActvity extends AppCompatActivity
 
           if (TextUtils.isEmpty(phone))
           {
-            Toast.makeText(this, "please write your username  ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "please write your number ", Toast.LENGTH_SHORT).show();
           }
           else if (TextUtils.isEmpty(password))
           {
