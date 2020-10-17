@@ -9,13 +9,179 @@
     android:background="@drawable/welcome3"
     tools:context=".HomeActivity">
 
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:layout_marginLeft="35dp"
+        android:hint="Search"
+        android:textColor="#0000"
+        android:inputType="text"
+        android:textSize="20dp" />
+
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/carrots"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-100dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/boogaloo"
+                android:text="@string/carrot"
+                android:textColor="#FF3A00"
+                android:textSize="22dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1Kg = Rs.65.00"
+                android:fontFamily="@font/boogaloo"
+                android:textSize="18dp"
+                android:textColor="#000"
+                android:layout_marginTop="45dp"
+                android:layout_marginStart="-80dp"/>
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:src="@drawable/tomato"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="41.5dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tomato"
+                android:fontFamily="@font/boogaloo"
+                android:textSize="22dp"
+                android:textColor="#FF3A00"
+                android:layout_gravity="center"
+                android:layout_marginTop="-10dp"
+                android:layout_marginLeft="-100dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1Kg = Rs.65.00"
+                android:fontFamily="@font/boogaloo"
+                android:textSize="18dp"
+                android:textColor="#000"
+                android:layout_marginTop="45dp"
+                android:layout_marginLeft="-80dp"/>
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:src="@drawable/eggplat"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eggplant"
+                android:fontFamily="@font/boogaloo"
+                android:textSize="22dp"
+                android:textColor="#FF3A00"
+                android:layout_gravity="center"
+                android:layout_marginTop="-10dp"
+                android:layout_marginLeft="-100dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5pc = 65.00"
+                android:fontFamily="@font/boogaloo"
+                android:textSize="18dp"
+                android:textColor="#000"
+                android:layout_marginTop="45dp"
+                android:layout_marginLeft="-75dp"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:src="@drawable/water"
+        android:layout_marginTop="365dp"
+        android:layout_marginStart="30dp"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:text="WaterMellon"
+        android:textSize="20dp"
+        android:fontFamily="@font/boogaloo"
+        android:textColor="#000"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="505dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1Kg - Rs.45.00"
+        android:textSize="20dp"
+        android:fontFamily="@font/boogaloo"
+        android:textColor="#000"
+        android:layout_marginTop="550dp"
+        android:layout_marginStart="45dp"
+        />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:src="@drawable/mango2"
+        android:layout_marginTop="365dp"
+        android:layout_marginStart="255dp"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:text="WaterMellon"
+        android:textSize="20dp"
+        android:fontFamily="@font/boogaloo"
+        android:textColor="#000"
+        android:layout_marginStart="255dp"
+        android:layout_marginTop="505dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1Kg - Rs.45.00"
+        android:textSize="20dp"
+        android:fontFamily="@font/boogaloo"
+        android:textColor="#000"
+        android:layout_marginTop="550dp"
+        android:layout_marginStart="255dp"
+        />
+
+
+
+
+
+
+
+
 
 <Button
 android:id="@+id/logout_btn"
 android:layout_width="100dp"
 android:layout_height="50dp"
 android:layout_marginStart="150dp"
-android:layout_marginTop="500dp"
+android:layout_marginTop="650dp"
 android:background="#FF8B00"
 android:fontFamily="@font/boogaloo"
 android:gravity="center"

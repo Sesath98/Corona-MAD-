@@ -59,11 +59,11 @@ public class RegistryActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty(name))
         {
-            Toast.makeText(this, "please write your name",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "please write your phone number ",Toast.LENGTH_SHORT).show();
         }
         else if(TextUtils.isEmpty(phone))
     {
-        Toast.makeText(this, "please write your phone number ",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "please write your name  ",Toast.LENGTH_SHORT).show();
     }
         else if(TextUtils.isEmpty(password))
         {
