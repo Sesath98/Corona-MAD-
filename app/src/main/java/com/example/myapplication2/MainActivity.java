@@ -15,7 +15,6 @@ import com.google.firebase.database.DatabaseReference;
 
 public class MainActivity extends AppCompatActivity {
 
-    String[] country = { "Available", "Out of Stock", "Unavailable"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,17 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void editProductBtn(View view){
+    public void displayImages(View view){
 
-        Intent intent = new Intent(this, EditProductActivity.class);
-
-        startActivity(intent);
-
-    }
-
-    public void viewProductBtn(View view){
-
-        Intent intent = new Intent(this, ShowDetails.class);
+        Intent intent = new Intent(this, DisplayProductDetail.class);
 
         startActivity(intent);
 

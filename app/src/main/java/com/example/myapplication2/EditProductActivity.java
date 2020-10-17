@@ -24,6 +24,8 @@ public class EditProductActivity extends AppCompatActivity {
     String name;
     String unitPrice;
     String status;
+    String imageName;
+    String imageURL;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -46,8 +48,9 @@ public class EditProductActivity extends AppCompatActivity {
         name = intent.getStringExtra("PRODUCT_NAME");
         unitPrice = intent.getStringExtra("PRODUCT_UNIT_PRICE");
         status = intent.getStringExtra("PRODUCT_STATUS");
-
         prod_id = intent.getStringExtra("PRODUCT_ID");
+        imageName = intent.getStringExtra("PRODUCT_ImageName");
+        imageURL = intent.getStringExtra("PRODUCT_ImageURL");
 
         //Toast.makeText(this, intent.getStringExtra("PRODUCT_ID"), Toast.LENGTH_SHORT).show();
 
@@ -91,12 +94,12 @@ public class EditProductActivity extends AppCompatActivity {
 
         }else{
 
-            ProductItem productItem = new ProductItem(prod_id, strProdName, strProdUnitPrice, strProdStatus);
+            ProductItem productItem = new ProductItem(prod_id, strProdName, strProdUnitPrice, strProdStatus, imageName, imageURL);
 
             myRef.child(prod_id).setValue(productItem);
 
             //Toast.makeText(this, " Updated succesfully "+ prod_id + " " + name, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, ShowDetails.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
 
         }

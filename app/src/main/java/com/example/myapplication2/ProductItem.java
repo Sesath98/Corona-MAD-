@@ -6,12 +6,23 @@ public class ProductItem {
     String prod_Name;
     String prod_unit_price;
     String status;
+    String imageName;
+    String imageUrl;
 
     public ProductItem() {
 
     }
 
-    public ProductItem(String id, String prod_Name, String prod_unit_price, String status) {
+    public ProductItem(String id, String prod_Name, String prod_unit_price, String status, String imageName, String imageUrl) {
+        this.id = id;
+        this.prod_Name = prod_Name;
+        this.prod_unit_price = prod_unit_price;
+        this.status = status;
+        this.imageName = imageName;
+        this.imageUrl = imageUrl;
+    }
+
+    public ProductItem(String id, String prod_Name, String prod_unit_price, String status ) {
         this.id = id;
         this.prod_Name = prod_Name;
         this.prod_unit_price = prod_unit_price;
@@ -50,4 +61,19 @@ public class ProductItem {
         this.status = status;
     }
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
